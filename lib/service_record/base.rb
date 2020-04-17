@@ -1,5 +1,8 @@
+require 'service_record/callbacks'
+
 module ServiceRecord
   class Base
+    include Callbacks
     include ActiveModel::Attributes
     include ActiveModel::Validations
     include ActiveModel::AttributeAssignment
@@ -10,8 +13,10 @@ module ServiceRecord
         service.attributes = args
 
         if service.valid?
-          service.result = service.perform
-          service.result = nil if service.failure?
+          service.run_callbacks :perform do
+            service.result = service.perform
+            service.result = nil if service.failure?
+          end
         end
       end
     end

@@ -16,11 +16,52 @@ gem 'service_record'
 
 And then execute:
 
-    $ bundle install
+```shell
+$ bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install service_record
+```shell
+$ gem install service_record
+```
+
+Now you can start creating new service classes. Rails generator can be used to create new services, e.g, the following will create a service class file `app/services/authenticate_user.rb`.
+
+```shell
+rails g service authenticate_user
+```
+
+## Usage
+
+A basic Service class looks like the following
+
+```ruby
+class MyService < ApplicationService
+  attribute :email, :string
+  attribute :password, :string
+
+  validates :email, :password, presence: true
+
+  def perform
+  end
+end
+```
+
+Now you can invoke this service by writting;
+
+```ruby
+response = MyService.perform(email: '', password: '')
+```
+
+The returned response from a service will have the following useful attributes/methods,
+
+* `success?` contains true if service was performed without any errors, false otherwise
+* `failure?` contains opposite of success?
+* `result` contains returned value of service perform function
+* `errors` contains details about issues that occurr while performing the service 
+
+
 
 ## Example
 
@@ -60,17 +101,6 @@ end
 With ServiceRecord 😍
 
 ```ruby
-# Inside controllers/users_controller.rb
-def sign_in
-  response = AuthenticateUser.perform(params.permit(:email, :password))
-
-  if response.success?
-    render json: response.result
-  else
-    render json: response.errors, status: :unauthorized
-  end
-end
-
 # Inside services/authenticate_user.rb
 class AuthenticateUser < ApplicationService
   attribute :email, :string
@@ -87,11 +117,23 @@ class AuthenticateUser < ApplicationService
     errors.add :authentication, 'invalid credentials'
   end
 end
+
+
+# Inside controllers/users_controller.rb
+def sign_in
+  response = AuthenticateUser.perform(params.permit(:email, :password))
+
+  if response.success?
+    render json: response.result
+  else
+    render json: response.errors, status: :unauthorized
+  end
+end
 ```
 
 ## Validations
 
-ServiceRecord extends on `ActiveModel::Validations`, so, everything that you can do there can be done inside a service class and ServiceRecord will make sure that a service only runs the perform function when all validations are passed, otherwise `errors` will contain details about the validation issues. Since ServiceRecord doesn't have an underlining object that needs to persisted like in ActiveRecord, you should avoid conditons like on create/update/save etc.
+ServiceRecord extends on `ActiveModel::Validations`, so, everything that you can do there can be done inside a service class and ServiceRecord will make sure that a service only runs the perform function when all validations are passed, otherwise `errors` will contain details about the validation issues. Since services don't have an underlining object that needs to persisted like in ActiveRecord, you should avoid conditons filters like on create/update/save etc.
 
 You can also define callbacks like `before_validation` and `after_validation` just like you do inside an ActiveRecord class.
 

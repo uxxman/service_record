@@ -1,5 +1,7 @@
 # ServiceRecord
 
+[<img src="https://travis-ci.org/uxxman/service_record.svg?branch=master" alt="Build Status" />](https://travis-ci.org/github/uxxman/service_record)
+
 [![Gem Version](https://badge.fury.io/rb/service_record.svg)](https://badge.fury.io/rb/service_record)
 
 An ActiveRecord lookalike but for business model requirements, a.k.a Service Objects.

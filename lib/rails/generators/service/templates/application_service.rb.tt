@@ -1,0 +1,4 @@
+<% module_namespacing do -%>
+class ApplicationService < ServiceRecord::Base
+end
+<% end -%>

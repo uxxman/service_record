@@ -1,0 +1,15 @@
+<% module_namespacing do -%>
+class <%= class_name %> < ApplicationService
+  # Example attributes
+  #
+  # attribute :email, :string
+  # attribute :password, :string
+
+  # Example validations
+  #
+  # validates :email, :password, presence: true
+
+  def perform
+  end
+end
+<% end -%>

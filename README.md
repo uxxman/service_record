@@ -4,7 +4,7 @@ An ActiveRecord lookalike but for business model requirements, a.k.a Service Obj
 
 Rails is packed with all the amazing tools to get you started with building your new awesome project and enforces reliable and battle-tested guidelines. One of the guideline is "**thin controllers and fat models**", but sometimes (actually most of the time) its difficult to follow because most business requirements are not that simple like most CRUD operations. 
 
-Enters, ServiceRecord. Its similar to ActiveRecord models but their sole purpose is perform a big/complex/muilt-step task.
+Enters, ServiceRecord. Its similar to ActiveRecord models but their sole purpose is to perform a big/complex/muilt-step task without bloating the controllers or models.
 
 ## Installation
 
@@ -22,9 +22,107 @@ Or install it yourself as:
 
     $ gem install service_record
 
-## Usage
+## Example
 
-TODO: Write usage instructions here
+Let's take a real world example of users controller and the sign_in action that involes JWT authentication.
+
+Without ServiceRecord 🙈
+
+```ruby
+# Inside controllers/users_controller.rb
+def sign_in
+  token = nil
+  errors = []
+
+  # Basic validation
+  errors << 'Email is required' if params[:email].blank?
+  errors << 'Email is invalid' if params[:email].present? && /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.match?(params[:email])
+  errors << 'Password is required' if params[:password].blank?
+
+  if errors.size == 0
+    user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
+
+    if user.present?
+      token = JsonWebToken.encode(user_id: user.id)
+    else
+      errors << 'Invalid credentials'
+    end
+  end
+
+  if errors.size == 0
+    render json: token
+  else
+    render json: errors, status: :unauthorized
+  end
+end
+```
+
+With ServiceRecord 😍
+
+```ruby
+# Inside controllers/users_controller.rb
+def sign_in
+  response = AuthenticateUser.perform(params.permit(:email, :password))
+
+  if response.success?
+    render json: response.result
+  else
+    render json: response.errors, status: :unauthorized
+  end
+end
+
+# Inside services/authenticate_user.rb
+class AuthenticateUser < ApplicationService
+  attribute :email, :string
+  attribute :password, :string
+
+  validates :email, :password, presence: true
+  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+
+  def perform
+    user = User.find_by(email: email).try(:authenticate, password)
+
+    return JsonWebToken.encode(user_id: user.id) if user.present?
+    
+    errors.add :authentication, 'invalid credentials'
+  end
+end
+```
+
+## Validations
+
+ServiceRecord extends on `ActiveModel::Validations`, so, everything that you can do there can be done inside a service class and ServiceRecord will make sure that a service only runs the perform function when all validations are passed, otherwise `errors` will contain details about the validation issues. Since ServiceRecord doesn't have an underlining object that needs to persisted like in ActiveRecord, you should avoid conditons like on create/update/save etc.
+
+You can also define callbacks like `before_validation` and `after_validation` just like you do inside an ActiveRecord class.
+
+
+## Custom Errors
+
+Just like validation errors, you can also add custom errors that you want to be reported. It useful to handle errors which are not related to input parameters validation. E.g.
+
+```ruby
+errors.add :authentication, 'invalid credentials'
+```
+
+## Callbacks
+
+You can also add callbacks on the perform function similar to [ActiveJob's](https://edgeguides.rubyonrails.org/active_job_basics.html#callbacks) perform function. E.g.
+
+```ruby
+class SampleService < ApplicationService
+  before_perform :do_something
+
+  def perform
+  end
+
+  private
+    def do_something
+    end
+end
+```
+
+Availble callbacks are `before_perform`, `after_perform` and `around_perform`. If a `before_perform` calls `throw :abort`, the callback chain is hallted and perform function would not be called.
+
 
 ## Development
 

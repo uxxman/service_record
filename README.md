@@ -1,5 +1,7 @@
 # ServiceRecord
 
+[![Gem Version](https://badge.fury.io/rb/service_record.svg)](https://badge.fury.io/rb/service_record)
+
 An ActiveRecord lookalike but for business model requirements, a.k.a Service Objects.
 
 Rails is packed with all the amazing tools to get you started with building your new awesome project and enforces reliable and battle-tested guidelines. One of the guideline is "**thin controllers and fat models**", but sometimes (actually most of the time) its difficult to follow because most business requirements are not that simple like most CRUD operations. 

@@ -11,12 +11,11 @@ module ServiceRecord
     def self.perform(args = {})
       new.tap do |service|
         service.attributes = args
+        break service unless service.valid?
 
-        if service.valid?
-          service.run_callbacks :perform do
-            service.result = service.perform
-            service.result = nil if service.failure?
-          end
+        service.run_callbacks :perform do
+          service.result = service.perform
+          service.result = nil if service.failure?
         end
       end
     end

@@ -6,7 +6,6 @@ module ServiceRecord
     include ActiveModel::Attributes
     include ActiveModel::Validations
     include ActiveModel::AttributeAssignment
-    include ActiveModel::Validations::Callbacks
 
     def self.perform(args = {})
       new.tap do |service|

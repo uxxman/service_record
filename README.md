@@ -139,8 +139,6 @@ end
 
 ServiceRecord extends on `ActiveModel::Validations`, so, everything that you can do there can be done inside a service class and ServiceRecord will make sure that a service only runs the perform function when all validations are passed, otherwise `errors` will contain details about the validation issues.
 
-You can also define callbacks like `before_validation` and `after_validation` just like you do inside an ActiveRecord class.
-
 
 ## Custom Errors
 

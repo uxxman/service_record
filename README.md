@@ -1,12 +1,12 @@
 # ServiceRecord
 
-[<img src="https://travis-ci.org/uxxman/service_record.svg?branch=master" alt="Build Status" />](https://travis-ci.org/github/uxxman/service_record)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/uxxman/service_record/Continuous%20Integration)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7634ecae285ff14e6bd6/maintainability)](https://codeclimate.com/github/uxxman/service_record/maintainability)
 [![Gem Version](https://badge.fury.io/rb/service_record.svg)](https://badge.fury.io/rb/service_record)
 
 An ActiveRecord lookalike but for business model requirements, a.k.a Service Objects.
 
-Rails is packed with all the amazing tools to get you started with building your new awesome project and enforces reliable and battle-tested guidelines. One of the guideline is "**thin controllers and fat models**", but sometimes (actually most of the time) its difficult to follow because most business requirements are not that simple like most CRUD operations. 
+Rails is packed with amazing tools to get you started with building your new awesome project and enforces reliable and battle-tested guidelines. One of those guideline is "**thin controllers and fat models**", but sometimes (actually most of the time) its difficult to follow because most business requirements are not that simple like most CRUD operations. 
 
 Enters, ServiceRecord. Its similar to ActiveRecord models but their sole purpose is to perform a big/complex/muilt-step task without bloating the controllers or models.
 
@@ -137,14 +137,14 @@ end
 
 ## Validations
 
-ServiceRecord extends on `ActiveModel::Validations`, so, everything that you can do there can be done inside a service class and ServiceRecord will make sure that a service only runs the perform function when all validations are passed, otherwise `errors` will contain details about the validation issues. Since services don't have an underlining object that needs to persisted like in ActiveRecord, you should avoid conditons filters like on create/update/save etc.
+ServiceRecord extends on `ActiveModel::Validations`, so, everything that you can do there can be done inside a service class and ServiceRecord will make sure that a service only runs the perform function when all validations are passed, otherwise `errors` will contain details about the validation issues.
 
 You can also define callbacks like `before_validation` and `after_validation` just like you do inside an ActiveRecord class.
 
 
 ## Custom Errors
 
-Just like validation errors, you can also add custom errors that you want to be reported. It useful to handle errors which are not related to input parameters validation. E.g.
+Just like validation errors, you can also add custom errors that you want to be reported. Use them to handle errors which are not related to input parameters validation. E.g.
 
 ```ruby
 errors.add :authentication, 'invalid credentials'
@@ -162,12 +162,13 @@ class SampleService < ApplicationService
   end
 
   private
-    def do_something
-    end
+    
+  def do_something
+  end
 end
 ```
 
-Availble callbacks are `before_perform`, `after_perform` and `around_perform`. If a `before_perform` calls `throw :abort`, the callback chain is hallted and perform function would not be called.
+Availble callbacks are `before_perform`, `after_perform` and `around_perform`. If a `before_perform` calls `throw :abort`, the callback chain is hallted and perform function will not be called.
 
 
 ## Development
@@ -178,7 +179,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/uxxman-sherwani/service_record.
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/uxxman/service_record.
 
 
 ## License

@@ -81,6 +81,11 @@ RSpec.describe AuthenticateUser do
     context 'with success' do
       let(:response) { AuthenticateUser.perform!(email: AuthenticateUser::EMAIL, password: AuthenticateUser::PASSWORD) }
 
+      it 'returns a positive response' do
+        expect(response.success?).to eq(true)
+        expect(response.failure?).to eq(false)
+      end
+
       it 'does not raise an exception' do
         expect { response }.not_to raise_error
       end

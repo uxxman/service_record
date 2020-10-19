@@ -22,8 +22,9 @@ module ServiceRecord
 
     def self.perform!(args = {})
       service = perform(args)
+      return service if service.success?
 
-      raise Failure, service if service.failure?
+      raise Failure, service
     end
 
     attr_accessor :result

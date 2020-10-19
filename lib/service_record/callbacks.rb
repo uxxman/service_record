@@ -5,7 +5,7 @@ module ServiceRecord
     included do
       include ActiveSupport::Callbacks
 
-      define_callbacks :perform
+      define_callbacks :perform, skip_after_callbacks_if_terminated: true
     end
 
     class_methods do

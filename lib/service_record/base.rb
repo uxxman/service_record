@@ -1,3 +1,4 @@
+require 'service_record/failure'
 require 'service_record/callbacks'
 
 module ServiceRecord
@@ -17,6 +18,12 @@ module ServiceRecord
           service.result = nil if service.failure?
         end
       end
+    end
+
+    def self.perform!(args = {})
+      service = perform(args)
+
+      raise Failure, service if service.failure?
     end
 
     attr_accessor :result

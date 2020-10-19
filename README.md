@@ -1,8 +1,9 @@
 # ServiceRecord
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/uxxman/service_record/Continuous%20Integration)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7634ecae285ff14e6bd6/maintainability)](https://codeclimate.com/github/uxxman/service_record/maintainability)
-[![Gem Version](https://badge.fury.io/rb/service_record.svg)](https://badge.fury.io/rb/service_record)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/uxxman/service_record/CI)](https://github.com/uxxman/service_record/actions?query=workflow%3ACI)
+[![Code Climate coverage](https://img.shields.io/codeclimate/coverage/uxxman/service_record)](https://codeclimate.com/github/uxxman/service_record)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/uxxman/service_record)](https://codeclimate.com/github/uxxman/service_record)
+[![Gem](https://img.shields.io/gem/v/service_record)](https://rubygems.org/gems/service_record)
 
 An ActiveRecord lookalike but for business model requirements, a.k.a Service Objects.
 

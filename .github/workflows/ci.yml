@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: CI
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -24,3 +25,8 @@ jobs:
 
       - name: Run tests
         run: bundle exec rake
+      
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

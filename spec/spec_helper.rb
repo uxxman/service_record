@@ -1,3 +1,6 @@
+require 'coveralls'
+Coveralls.wear!('rails')
+
 require 'bundler/setup'
 require 'service_record'
 

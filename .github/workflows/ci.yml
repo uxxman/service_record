@@ -23,11 +23,12 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-      - name: Install Appraisal dependencies
+      - name: Appraisal
         run: bundle exec appraisal install
+        run: bundle exec appraisal rspec
 
       - name: Run tests
-        run: bundle exec appraisal rspec
+        run: bundle exec rspec
 
       - name: Code Climate
         uses: paambaati/codeclimate-action@v2.7.4

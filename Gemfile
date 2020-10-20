@@ -5,4 +5,5 @@ gemspec
 
 gem 'rake', '~> 12.3'
 gem 'rspec', '~> 3.9'
+gem 'appraisal', '~> 2.3'
 gem 'simplecov', require: false

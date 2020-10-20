@@ -64,7 +64,9 @@ The returned response from a service will have the following useful attributes/m
 * `success?` contains true if service was performed without any errors, false otherwise
 * `failure?` contains opposite of success?
 * `result` contains returned value of service perform function
-* `errors` contains details about issues that occurr while performing the service 
+* `errors` contains details about issues that occurr while performing the service
+
+There is a **perform!** (with a bang !) method which will raise **ServiceRecord::Failure** in case of service failure.
 
 
 

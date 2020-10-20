@@ -43,7 +43,7 @@ RSpec.describe AuthenticateUser do
     end
 
     context 'with missing credentials' do
-      let(:response) { AuthenticateUser.perform(email: AuthenticateUser::EMAIL) }
+      let(:response) { AuthenticateUser.perform(email: '', password: '') }
 
       it 'has errors' do
         expect(response.errors.size.positive?).to eq(true)

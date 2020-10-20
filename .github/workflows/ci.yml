@@ -21,6 +21,9 @@ jobs:
           ruby-version: 2.7
     
       - name: Install dependencies
+        run: bundle install
+
+      - name: Install Appraisal dependencies
         run: bundle exec appraisal install
 
       - name: Run tests

@@ -8,6 +8,8 @@ module ServiceRecord
     include ActiveModel::Validations
     include ActiveModel::AttributeAssignment
 
+    attr_accessor :result
+
     def self.perform(args = {})
       new.tap do |service|
         service.attributes = args
@@ -15,7 +17,6 @@ module ServiceRecord
 
         service.run_callbacks :perform do
           service.result = service.perform
-          service.result = nil if service.failure?
         end
       end
     end
@@ -26,8 +27,6 @@ module ServiceRecord
 
       raise Failure, service
     end
-
-    attr_accessor :result
 
     def success?
       errors.empty?

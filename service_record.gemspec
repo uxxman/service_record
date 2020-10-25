@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/uxxman/service_record'
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
   spec.metadata['homepage_uri']    = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage
@@ -25,4 +25,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activemodel', '>= 5.0'
+
+  spec.add_development_dependency 'appraisal', '~> 2.3'
+  spec.add_development_dependency 'rake', '~> 13.0', '>= 13.0.1'
+  spec.add_development_dependency 'rspec', '~> 3.9'
+  spec.add_development_dependency 'simplecov', '~> 0.17.1'
 end

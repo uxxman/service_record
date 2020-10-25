@@ -26,7 +26,7 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.3.1)
     minitest (5.14.2)
-    rake (12.3.3)
+    rake (13.0.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -40,7 +40,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
-    simplecov (0.16.1)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
@@ -56,10 +56,10 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal (~> 2.3)
-  rake (~> 12.3)
+  rake (~> 13.0, >= 13.0.1)
   rspec (~> 3.9)
   service_record!
-  simplecov
+  simplecov (~> 0.17.1)
 
 BUNDLED WITH
    2.1.4

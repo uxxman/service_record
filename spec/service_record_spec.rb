@@ -4,8 +4,8 @@ RSpec.describe ServiceRecord do
   end
 
   it 'raises an error when a child class does not implement #perform method' do
-    class Service < ServiceRecord::Base; end
+    stub_const('DummyService', Class.new(ServiceRecord::Base))
 
-    expect { Service.perform }.to raise_error(NotImplementedError)
+    expect { DummyService.perform }.to raise_error(NotImplementedError)
   end
 end

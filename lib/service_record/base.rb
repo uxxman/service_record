@@ -1,3 +1,4 @@
+require 'active_model'
 require 'service_record/failure'
 require 'service_record/callbacks'
 

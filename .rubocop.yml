@@ -1,6 +1,8 @@
 require:
+  - rubocop-rake
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-packaging
   - rubocop-performance
 
 AllCops:

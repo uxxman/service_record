@@ -1,7 +1,6 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'bundler/setup'
 require 'service_record'
 
 RSpec.configure do |config|

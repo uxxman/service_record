@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ServiceRecord
   class Failure < StandardError
     attr_reader :service

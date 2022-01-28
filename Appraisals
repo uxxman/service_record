@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 appraise 'activemodel-6.0' do
   gem 'activemodel', '~> 6.0'
 end

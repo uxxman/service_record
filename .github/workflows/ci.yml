@@ -18,10 +18,15 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: 3.0
+          cache-version: 1
+          bundler-cache: true
     
       - name: Install dependencies
         run: bundle install
+
+      - name: Lint via Rubocop
+        run: bundle exec rubocop
 
       - name: Appraisal dependencies
         run: bundle exec appraisal install
@@ -32,7 +37,7 @@ jobs:
       - name: Run tests
         run: bundle exec rspec
 
-      - name: Code Climate
+      - name: Report to Code Climate
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: 89848be69d8cf9080722c0781bddcec13fe8cc86cd3c410f500bc8811b28dbfc

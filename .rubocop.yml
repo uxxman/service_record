@@ -13,8 +13,5 @@ AllCops:
     - gemfiles/*
     - vendor/**/*
 
-Style/Documentation:
-  Enabled: false
-
 Metrics/BlockLength:
   IgnoredMethods: ['describe']

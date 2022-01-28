@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ServiceRecord
+  # Defines before/around/after callbacks for the 'perform' method
   module Callbacks
     extend ActiveSupport::Concern
 

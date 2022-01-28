@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ServiceRecord
+  # Exception to be raised when a service fails
   class Failure < StandardError
     attr_reader :service
 

@@ -4,6 +4,11 @@ require 'rails/generators/named_base'
 
 module Rails
   module Generators
+    # Create AppicationService and SubService classes using Rails generators.
+    #
+    # E.g:
+    # bin/rails service my_service
+    #
     class ServiceGenerator < Rails::Generators::NamedBase
       desc 'This generator creates a service file at app/services'
 

@@ -11,3 +11,9 @@ end
 appraise 'activemodel-7.0' do
   gem 'activemodel', '~> 7.0'
 end
+
+appraise 'activemodel-main' do
+  git 'https://github.com/rails/rails.git' do
+    gem 'activemodel'
+  end
+end

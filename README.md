@@ -1,15 +1,15 @@
 # ServiceRecord
 
+[![Gem](https://img.shields.io/gem/v/service_record)](https://rubygems.org/gems/service_record)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/uxxman/service_record/CI)](https://github.com/uxxman/service_record/actions?query=workflow%3ACI)
 [![Code Climate coverage](https://img.shields.io/codeclimate/coverage/uxxman/service_record)](https://codeclimate.com/github/uxxman/service_record)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/uxxman/service_record)](https://codeclimate.com/github/uxxman/service_record)
-[![Gem](https://img.shields.io/gem/v/service_record)](https://rubygems.org/gems/service_record)
 
 An ActiveRecord lookalike but for business model requirements, a.k.a Service Objects.
 
 Rails is packed with amazing tools to get you started with building your new awesome project and enforces reliable and battle-tested guidelines. One of those guideline is "**thin controllers and fat models**", but sometimes (actually most of the time) its difficult to follow because most business requirements are not that simple like most CRUD operations. 
 
-Enters, ServiceRecord. Its similar to ActiveRecord models but their sole purpose is to perform a big/complex/muilt-step task without bloating the controllers or models.
+Enters, ServiceRecord, a tiny wrapper around basic goodies included in Rails. Its similar to ActiveRecord models but their sole purpose is to perform a big/complex/muilt-step task without bloating the controllers or models.
 
 ## Installation
 
@@ -66,9 +66,7 @@ The returned response from a service will have the following useful attributes/m
 * `result` contains returned value of service perform function
 * `errors` contains details about issues that occurr while performing the service
 
-There is a **perform!** (with a bang !) method which will raise **ServiceRecord::Failure** in case of service failure.
-
-
+There is also a **perform!** (with a bang !) method which will raise **ServiceRecord::Failure** in case of service failure.
 
 ## Example
 
@@ -83,12 +81,12 @@ def sign_in
   errors = []
 
   # Basic validation
-  errors << 'Email is required' if params[:email].blank?
-  errors << 'Email is invalid' if params[:email].present? && /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.match?(params[:email])
+  errors << 'Email is required'    if params[:email].blank?
+  errors << 'Email is invalid'     if params[:email].present? && /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.match?(params[:email])
   errors << 'Password is required' if params[:password].blank?
 
   if errors.size == 0
-    user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
+    user = User.find_by(email: params[:email])&.try(:authenticate, params[:password])
 
     if user.present?
       token = JsonWebToken.encode(user_id: user.id)
@@ -119,9 +117,11 @@ class AuthenticateUser < ApplicationService
   def perform
     user = User.find_by(email: email).try(:authenticate, password)
 
-    return JsonWebToken.encode(user_id: user.id) if user.present?
-    
-    errors.add :authentication, 'invalid credentials'
+    if user.present?
+      JsonWebToken.encode(user_id: user.id)
+    else
+      errors.add :authentication, 'invalid credentials'
+    end
   end
 end
 
@@ -174,7 +174,9 @@ Availble callbacks are `before_perform`, `after_perform` and `around_perform`. I
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+ServiceRecord uses appraisals to test the code base against multiple versions of Rails ActiveModel. When first developing, you need to run `bundle install` and then `bundle exec appraisal install`, to install the different gem sets. You can then run all appraisal files (like CI does), with `appraisal rake`.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 

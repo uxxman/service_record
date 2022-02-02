@@ -67,8 +67,8 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
-    rubocop-rake (0.5.1)
-      rubocop
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
     rubocop-rspec (2.8.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
@@ -93,7 +93,7 @@ DEPENDENCIES
   rubocop-packaging (~> 0.5.1)
   rubocop-performance (~> 1.8, >= 1.8.1)
   rubocop-rails (~> 2.8, >= 2.8.1)
-  rubocop-rake (~> 0.5.1)
+  rubocop-rake (~> 0.6.0)
   rubocop-rspec (~> 2.0, >= 1.44.1)
   service_record!
   simplecov (~> 0.17.1)

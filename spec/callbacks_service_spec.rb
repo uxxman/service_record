@@ -8,19 +8,19 @@ RSpec.describe CallbacksService do
       let(:response) { described_class.perform(param: 'valid') }
 
       it 'runs before callback' do
-        expect(response.before_callback_called).to eq(true)
+        expect(response.before_callback_called).to be(true)
       end
 
       it 'runs before around callback' do
-        expect(response.around_before_callback_called).to eq(true)
+        expect(response.around_before_callback_called).to be(true)
       end
 
       it 'runs after around callback' do
-        expect(response.around_after_callback_called).to eq(true)
+        expect(response.around_after_callback_called).to be(true)
       end
 
       it 'runs after callback' do
-        expect(response.after_callback_called).to eq(true)
+        expect(response.after_callback_called).to be(true)
       end
     end
 
@@ -28,19 +28,19 @@ RSpec.describe CallbacksService do
       let(:response) { described_class.perform(param: 'invalid') }
 
       it 'does not run before callback' do
-        expect(response.before_callback_called).to eq(false)
+        expect(response.before_callback_called).to be(false)
       end
 
       it 'does not run before around callback' do
-        expect(response.around_before_callback_called).to eq(false)
+        expect(response.around_before_callback_called).to be(false)
       end
 
       it 'does not run after around callback' do
-        expect(response.around_after_callback_called).to eq(false)
+        expect(response.around_after_callback_called).to be(false)
       end
 
       it 'does not run after callback' do
-        expect(response.after_callback_called).to eq(false)
+        expect(response.after_callback_called).to be(false)
       end
     end
 
@@ -48,19 +48,19 @@ RSpec.describe CallbacksService do
       let(:response) { described_class.perform(param: 'abort') }
 
       it 'runs before callback' do
-        expect(response.before_callback_called).to eq(true)
+        expect(response.before_callback_called).to be(true)
       end
 
       it 'does not run before around callback' do
-        expect(response.around_before_callback_called).to eq(false)
+        expect(response.around_before_callback_called).to be(false)
       end
 
       it 'does not run after around callback' do
-        expect(response.around_after_callback_called).to eq(false)
+        expect(response.around_after_callback_called).to be(false)
       end
 
       it 'does not run after callback' do
-        expect(response.after_callback_called).to eq(false)
+        expect(response.after_callback_called).to be(false)
       end
     end
   end

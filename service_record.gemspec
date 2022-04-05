@@ -29,13 +29,13 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activemodel', '>= 6.0'
 
-  spec.add_development_dependency 'appraisal', '~> 2.3'
-  spec.add_development_dependency 'rake', '~> 13.0', '>= 13.0.1'
+  spec.add_development_dependency 'appraisal', '~> 2.4'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'rubocop-packaging', '~> 0.5.1'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.8', '>= 1.8.1'
-  spec.add_development_dependency 'rubocop-rails', '~> 2.8', '>= 2.8.1'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.13'
+  spec.add_development_dependency 'rubocop-rails', '~> 2.14'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
-  spec.add_development_dependency 'rubocop-rspec', '>= 1.44.1', '~> 2.0'
-  spec.add_development_dependency 'simplecov', '~> 0.17.1'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.9'
+  spec.add_development_dependency 'simplecov', '~> 0.21.2'
 end

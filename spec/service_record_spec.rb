@@ -2,7 +2,7 @@
 
 RSpec.describe ServiceRecord do
   it 'has a version number' do
-    expect(ServiceRecord::VERSION).not_to be nil
+    expect(ServiceRecord::VERSION).not_to be_nil
   end
 
   it 'raises an error when a child class does not implement #perform method' do

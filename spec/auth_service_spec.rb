@@ -8,15 +8,15 @@ RSpec.describe AuthService do
       let(:response) { described_class.perform(email: AuthService::EMAIL, password: AuthService::PASSWORD) }
 
       it 'has no errors' do
-        expect(response.errors.size.zero?).to eq(true)
+        expect(response.errors.size.zero?).to be(true)
       end
 
       it 'returns true for success?' do
-        expect(response.success?).to eq(true)
+        expect(response.success?).to be(true)
       end
 
       it 'returns false for failure?' do
-        expect(response.failure?).to eq(false)
+        expect(response.failure?).to be(false)
       end
     end
 
@@ -24,15 +24,15 @@ RSpec.describe AuthService do
       let(:response) { described_class.perform(email: AuthService::EMAIL, password: 'wrong') }
 
       it 'has errors' do
-        expect(response.errors.size.positive?).to eq(true)
+        expect(response.errors.size.positive?).to be(true)
       end
 
       it 'returns false for success?' do
-        expect(response.success?).to eq(false)
+        expect(response.success?).to be(false)
       end
 
       it 'returns true for failure?' do
-        expect(response.failure?).to eq(true)
+        expect(response.failure?).to be(true)
       end
 
       it 'reports about errors' do
@@ -44,7 +44,7 @@ RSpec.describe AuthService do
       let(:response) { described_class.perform }
 
       it 'has errors' do
-        expect(response.errors.size.positive?).to eq(true)
+        expect(response.errors.size.positive?).to be(true)
       end
 
       it 'reports about missing email' do

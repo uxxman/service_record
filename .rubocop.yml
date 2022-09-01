@@ -14,4 +14,4 @@ AllCops:
     - vendor/**/*
 
 Metrics/BlockLength:
-  IgnoredMethods: ['describe']
+  AllowedMethods: ['describe']

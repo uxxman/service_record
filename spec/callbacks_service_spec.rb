@@ -7,60 +7,24 @@ RSpec.describe CallbacksService do
     context 'with valid argument' do
       let(:response) { described_class.perform(param: 'valid') }
 
-      it 'runs before callback' do
-        expect(response.before_callback_called).to be(true)
-      end
-
-      it 'runs before around callback' do
-        expect(response.around_before_callback_called).to be(true)
-      end
-
-      it 'runs after around callback' do
-        expect(response.around_after_callback_called).to be(true)
-      end
-
-      it 'runs after callback' do
-        expect(response.after_callback_called).to be(true)
+      it 'runs all callbacks in order' do
+        expect(response.result).to eq(%i[before around_before perform after around_after])
       end
     end
 
     context 'with invalid argument' do
       let(:response) { described_class.perform(param: 'invalid') }
 
-      it 'does not run before callback' do
-        expect(response.before_callback_called).to be(false)
-      end
-
-      it 'does not run before around callback' do
-        expect(response.around_before_callback_called).to be(false)
-      end
-
-      it 'does not run after around callback' do
-        expect(response.around_after_callback_called).to be(false)
-      end
-
-      it 'does not run after callback' do
-        expect(response.after_callback_called).to be(false)
+      it 'does not run any callbacks' do
+        expect(response.result).to be_nil
       end
     end
 
     context 'with abort argument' do
       let(:response) { described_class.perform(param: 'abort') }
 
-      it 'runs before callback' do
-        expect(response.before_callback_called).to be(true)
-      end
-
-      it 'does not run before around callback' do
-        expect(response.around_before_callback_called).to be(false)
-      end
-
-      it 'does not run after around callback' do
-        expect(response.around_after_callback_called).to be(false)
-      end
-
-      it 'does not run after callback' do
-        expect(response.after_callback_called).to be(false)
+      it 'does not run any callbacks' do
+        expect(response.result).to be_nil
       end
     end
   end

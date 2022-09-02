@@ -2,32 +2,33 @@
 
 class CallbacksService < ServiceRecord::Base
   attribute :param, :string
-  attribute :perform_func_called,           :boolean, default: false
-  attribute :after_callback_called,         :boolean, default: false
-  attribute :before_callback_called,        :boolean, default: false
-  attribute :around_after_callback_called,  :boolean, default: false
-  attribute :around_before_callback_called, :boolean, default: false
-
   validates :param, presence: true, inclusion: { in: %w[valid abort] }
 
   before_perform do
-    self.before_callback_called = true
     throw :abort if param == 'abort'
+    add_to_stack :before
   end
 
   around_perform do |_, block|
-    self.around_before_callback_called = true
-
+    add_to_stack :around_before
     block.call
-
-    self.around_after_callback_called = true
+    add_to_stack :around_after
   end
 
   after_perform do
-    self.after_callback_called = true
+    add_to_stack :after
   end
 
   def perform
-    self.perform_func_called = true
+    add_to_stack :perform
+
+    @called_stack
+  end
+
+  private
+
+  def add_to_stack(callback)
+    @called_stack ||= []
+    @called_stack << callback
   end
 end

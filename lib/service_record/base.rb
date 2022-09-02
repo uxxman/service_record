@@ -2,13 +2,14 @@
 
 require 'active_model'
 require 'service_record/failure'
+require 'service_record/response'
 require 'service_record/callbacks'
 
 module ServiceRecord
   # Base class to be extended by all service classes
   #
-  #   class MyService < ServiceRecord
-  #   end
+  # class MyService < ServiceRecord
+  # end
   #
   class Base
     include Callbacks
@@ -23,11 +24,14 @@ module ServiceRecord
     def self.perform(args = {})
       new.tap do |service|
         service.attributes = args
-        break service unless service.valid?
 
-        service.run_callbacks :perform do
-          service.result = service.perform
+        if service.valid?
+          service.run_callbacks :perform do
+            service.result = service.perform
+          end
         end
+
+        return Response.new(service.result, service.errors)
       end
     end
 
@@ -37,16 +41,6 @@ module ServiceRecord
       return service if service.success?
 
       raise Failure, service
-    end
-
-    # Checks the service for errors. Returns +true+ if no errors are found, +false+ otherwise.
-    def success?
-      errors.empty?
-    end
-
-    # Checks the service for errors. Returns +false+ if no errors are found, +true+ otherwise.
-    def failure?
-      !success?
     end
 
     # Each subclass must define the *perform* method

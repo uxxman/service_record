@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     service_record (1.4.0)
-      activemodel (>= 6.0)
+      activemodel (>= 6.1)
 
 GEM
   remote: https://rubygems.org/

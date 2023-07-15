@@ -1,7 +1,7 @@
 # ServiceRecord
 
 [![Gem](https://img.shields.io/gem/v/service_record)](https://rubygems.org/gems/service_record)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/uxxman/service_record/CI)](https://github.com/uxxman/service_record/actions?query=workflow%3ACI)
+[![GitHub Workflow Status](https://github.com/uxxman/service_record/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/uxxman/service_record/actions/workflows/ci.yml)
 [![Code Climate coverage](https://img.shields.io/codeclimate/coverage/uxxman/service_record)](https://codeclimate.com/github/uxxman/service_record)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/uxxman/service_record)](https://codeclimate.com/github/uxxman/service_record)
 

@@ -21,6 +21,9 @@ jobs:
           - 'activemodel_6.1'
           - 'activemodel_7.0'
           - 'activemodel_main'
+        exclude:
+          - ruby: 'truffleruby'
+            gemfile: 'activemodel_main'
 
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile

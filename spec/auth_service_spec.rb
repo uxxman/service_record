@@ -8,7 +8,7 @@ RSpec.describe AuthService do
       let(:response) { described_class.perform(email: AuthService::EMAIL, password: AuthService::PASSWORD) }
 
       it 'has no errors' do
-        expect(response.errors.empty).to be(true)
+        expect(response.errors.empty?).to be(true)
       end
 
       it 'returns true for success?' do

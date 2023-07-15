@@ -48,11 +48,11 @@ RSpec.describe AuthService do
       end
 
       it 'reports about missing email' do
-        expect(response.errors[:email]).to include('can\'t be blank')
+        expect(response.errors[:email]).to include(I18n.t('errors.messages.blank'))
       end
 
       it 'reports about missing password' do
-        expect(response.errors[:password]).to include('can\'t be blank')
+        expect(response.errors[:password]).to include(I18n.t('errors.messages.blank'))
       end
     end
   end

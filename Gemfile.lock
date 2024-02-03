@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    service_record (1.4.1)
+    service_record (1.4.2)
       activemodel (>= 6.1)
 
 GEM

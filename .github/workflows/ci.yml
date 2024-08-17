@@ -24,6 +24,9 @@ jobs:
           - 'activemodel_7.1'
           - 'activemodel_7.2'
           - 'activemodel_main'
+        exclude:
+          - ruby: '3.4'
+            gemfile: 'activemodel_6.1'
 
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile

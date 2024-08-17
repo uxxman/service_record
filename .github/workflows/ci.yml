@@ -13,19 +13,20 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - '3.0'
           - '3.1'
           - '3.2'
           - '3.3'
+          - '3.4'
           - 'truffleruby'
         gemfile:
           - 'activemodel_6.1'
           - 'activemodel_7.0'
           - 'activemodel_7.1'
+          - 'activemodel_7.2'
           - 'activemodel_main'
         exclude:
-          - ruby: '3.0'
-            gemfile: 'activemodel_main'
+          - ruby: '3.4'
+            gemfile: 'activemodel_6.1'
 
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
